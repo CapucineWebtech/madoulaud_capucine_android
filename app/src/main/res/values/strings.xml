@@ -7,6 +7,11 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="presentation_of_the_app">Welcome to our personalized cocktail app!\n\nHere, we celebrate the art of mixology with a unique twist. Whether you\'re a fan of classic cocktails, a lover of alcohol-free drinks, or simply undecided, we\'ve got you covered.\n\nExplore our selection of cocktails with just one click. Choose from creations with alcohol, without alcohol, or let yourself be surprised by our indifferent selection.\n\nDiscover each cocktail with a tempting photo, its name, and of course, the answer to the crucial question: does it contain alcohol? When you find the one that catches your eye, a simple click will reveal all its secrets.\n\nGet the detailed recipe, appetizing photo, necessary ingredients, the glass to use, precise measurements, and much more. Get ready to become the ultimate mixologist, whether you\'re at home or out for the night.\n\nDive into a world of flavors, creativity, and elegance. Welcome to the custom cocktail experience.</string>
+    <string name="view_all_cocktails">View all cocktails</string>
+    <string name="view_alcoholic_cocktails">View alcoholic cocktails</string>
+    <string name="view_non_alcoholic_cocktails">View non alcoholic cocktails</string>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

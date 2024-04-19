@@ -1,7 +1,7 @@
 package fr.nextu.madoulaud_capucine
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -11,7 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import fr.nextu.madoulaud_capucine.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class ListActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -28,9 +28,17 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        val listType = intent.getStringExtra("listType")
+        when(listType) {
+            "complete" -> {
+                Log.d("ListActivity", "Charger la liste complète")
+            }
+            "alcoholic" -> {
+                Log.d("ListActivity", "Charger uniquement les boissons alcoolisées")
+            }
+            "nonAlcoholic" -> {
+                Log.d("ListActivity", "Charger uniquement les boissons non alcoolisées")
+            }
         }
     }
 

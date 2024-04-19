@@ -13,7 +13,10 @@
         android:theme="@style/Theme.AppAndroidKotlin"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FirstActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AppAndroidKotlin">
