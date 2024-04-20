@@ -50,4 +50,9 @@
     </string>
     <string name="cocktail_image">cocktail image</string>
     <string name="contain_alcohol">contain alcohol</string>
+    <string name="glass_label">Glass:</string>
+    <string name="list_of_ingredients_label">List of ingredients:</string>
+    <string name="with_alcohol_label">With alcohol:</string>
+    <string name="last_modification_label">Last modification:</string>
+    <string name="instructions_label">Instructions:</string>
 </resources>

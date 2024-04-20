@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "Cocktail")
 class Cocktail (
     @PrimaryKey val idDrink: Int,
-    @ColumnInfo(name = "strDrink") val strDrink: String,
-    @ColumnInfo(name = "strDrinkThumb") val strDrinkThumb: String,
-    @ColumnInfo(name = "isAlcoholic") var isAlcoholic: Boolean = false,
+    @ColumnInfo(name = "strDrink") var strDrink: String,
+    @ColumnInfo(name = "strDrinkThumb") var strDrinkThumb: String,
+    @ColumnInfo(name = "isAlcoholic") var isAlcoholic: Boolean,
 ){
     @ColumnInfo(name = "strGlass", defaultValue = "") var strGlass: String? = ""
         set(value) {
@@ -143,4 +143,18 @@ class Cocktail (
         set(value) {
             field = value ?: ""
         }
+    @ColumnInfo(name = "strAlcoholic", defaultValue = "") var strAlcoholic: String? = ""
+        set(value) {
+            field = value ?: ""
+        }
+
+    fun formattedIngredientsAndMeasures(): String = buildString {
+        val ingredients = listOf(strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15)
+        val measures = listOf(strMeasure1, strMeasure2, strMeasure3, strMeasure4, strMeasure5, strMeasure6, strMeasure7, strMeasure8, strMeasure9, strMeasure10, strMeasure11, strMeasure12, strMeasure13, strMeasure14, strMeasure15)
+        ingredients.zip(measures).forEach { (ingredient, measure) ->
+            if (!ingredient.isNullOrEmpty() && !measure.isNullOrEmpty()) {
+                append("$ingredient - $measure\n")
+            }
+        }
+    }
 }

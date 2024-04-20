@@ -9,27 +9,123 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="16dp">
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="40dp">
 
-        <Button
-            android:id="@+id/button_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/previous"
-            app:layout_constraintBottom_toTopOf="@id/textview_second"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/strDrinkThumb_cocktail"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/error"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:contentDescription="@string/cocktail_image" />
 
         <TextView
-            android:id="@+id/textview_second"
+            android:id="@+id/strDrink_cocktail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="..."
+            app:layout_constraintTop_toTopOf="@+id/strDrinkThumb_cocktail"
+            app:layout_constraintBottom_toBottomOf="@+id/strDrinkThumb_cocktail"
+            app:layout_constraintLeft_toRightOf="@+id/strDrinkThumb_cocktail"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/strGlass_cocktail_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/lorem_ipsum"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_second" />
+            android:text="@string/glass_label"
+            app:layout_constraintTop_toBottomOf="@+id/strDrinkThumb_cocktail"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/strGlass_cocktail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="3dp"
+            app:layout_constraintStart_toEndOf="@+id/strGlass_cocktail_label"
+            app:layout_constraintTop_toBottomOf="@+id/strDrinkThumb_cocktail" />
+
+        <TextView
+            android:id="@+id/isAlcoholic_cocktail_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/with_alcohol_label"
+            app:layout_constraintTop_toBottomOf="@+id/strGlass_cocktail"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/isAlcoholic_cocktail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            app:layout_constraintTop_toBottomOf="@+id/strGlass_cocktail"
+            app:layout_constraintStart_toEndOf="@+id/isAlcoholic_cocktail_label" />
+
+        <TextView
+            android:id="@+id/strIngredient_cocktail_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/list_of_ingredients_label"
+            app:layout_constraintTop_toBottomOf="@+id/isAlcoholic_cocktail"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/strIngredient_cocktail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/strIngredient_cocktail_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/strInstructions_cocktail_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/instructions_label"
+            app:layout_constraintTop_toBottomOf="@+id/strIngredient_cocktail"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/strInstructions_cocktail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/strInstructions_cocktail_label"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:id="@+id/dateModified_cocktail_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/last_modification_label"
+            app:layout_constraintTop_toBottomOf="@+id/strInstructions_cocktail"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dateModified_cocktail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/strInstructions_cocktail"
+            app:layout_constraintStart_toEndOf="@+id/dateModified_cocktail_label"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="3dp" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

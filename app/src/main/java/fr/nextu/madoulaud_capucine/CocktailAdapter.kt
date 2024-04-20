@@ -7,9 +7,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import fr.nextu.madoulaud_capucine.entity.Cocktail
 import fr.nextu.madoulaud_capucine.entity.Cocktails
 
-class CocktailAdapter(val cocktails: Cocktails) : RecyclerView.Adapter<CocktailAdapter.CoctailViewHolder>() {
+class CocktailAdapter(
+    private val cocktails: Cocktails,
+    private val onClick: (Cocktail) -> Unit
+) : RecyclerView.Adapter<CocktailAdapter.CoctailViewHolder>() {
+
     class CoctailViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.strDrink_cocktail)
         val imageView: ImageView = view.findViewById(R.id.strDrinkThumb_cocktail)
@@ -35,11 +40,11 @@ class CocktailAdapter(val cocktails: Cocktails) : RecyclerView.Adapter<CocktailA
             .placeholder(R.drawable.placeholder)
             .error(R.drawable.error)
             .into(holder.imageView)
+
+        holder.itemView.setOnClickListener {
+            onClick(cocktail)
+        }
     }
 
-    override fun getItemCount(): Int {
-        return cocktails.drinks.size
-    }
+    override fun getItemCount(): Int = cocktails.drinks.size
 }
-
-

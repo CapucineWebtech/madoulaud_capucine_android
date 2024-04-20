@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.nextu.madoulaud_capucine.databinding.FragmentFirstBinding
+import fr.nextu.madoulaud_capucine.db.AppDatabase
 import fr.nextu.madoulaud_capucine.entity.Cocktails
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -36,17 +38,12 @@ class FirstFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }
-
-        cocktail_recycler = binding.listCocktail.apply{
-            adapter = CocktailAdapter(Cocktails(emptyList()))
-            layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@FirstFragment.context)
+        cocktail_recycler = binding.listCocktail.apply {
+            layoutManager = LinearLayoutManager(this@FirstFragment.context)
+            adapter = CocktailAdapter(Cocktails(emptyList())) {}
         }
 
         db = AppDatabase.getInstance(requireContext())
-
     }
 
     override fun onStart() {
@@ -70,8 +67,12 @@ class FirstFragment : Fragment() {
             flow.collect { cocktailsList ->
                 val mutableCocktailsList = cocktailsList.toMutableList()
                 mutableCocktailsList.shuffle()
+
                 CoroutineScope(Dispatchers.Main).launch {
-                    cocktail_recycler.adapter = CocktailAdapter(Cocktails(mutableCocktailsList))
+                    cocktail_recycler.adapter = CocktailAdapter(Cocktails(mutableCocktailsList)) { cocktail ->
+                        val action = FirstFragmentDirections.actionFirstFragmentToSecondFragment(cocktail.idDrink.toString())
+                        findNavController().navigate(action)
+                    }
                 }
             }
         }

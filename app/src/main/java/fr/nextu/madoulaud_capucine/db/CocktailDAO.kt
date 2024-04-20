@@ -1,10 +1,11 @@
-package fr.nextu.madoulaud_capucine
+package fr.nextu.madoulaud_capucine.db
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import fr.nextu.madoulaud_capucine.entity.Cocktail
 import kotlinx.coroutines.flow.Flow
 
@@ -14,11 +15,17 @@ interface CocktailDAO {
     fun getAll(): List<Cocktail>
 
     @Query("SELECT * FROM cocktail WHERE idDrink = :id")
-    fun getById(id: Int): Cocktail
+    fun getById(id: String): Cocktail
 
     //insert or update
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg cocktails: Cocktail)
+
+    @Update
+    fun updateCocktail(cocktail: Cocktail)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertCocktail(cocktail: Cocktail): Long
 
     @Delete
     fun delete(cocktail: Cocktail)

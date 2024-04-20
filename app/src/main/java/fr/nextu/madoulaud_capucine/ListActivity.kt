@@ -10,6 +10,8 @@ import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
 import fr.nextu.madoulaud_capucine.databinding.ActivityMainBinding
+import fr.nextu.madoulaud_capucine.db.AppDatabase
+import fr.nextu.madoulaud_capucine.entity.Cocktail
 import fr.nextu.madoulaud_capucine.entity.Cocktails
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -96,7 +98,24 @@ class ListActivity : AppCompatActivity() {
     private fun cocktailsFromJson(jsonString: String, isAlcoholic: Boolean) {
         val gson = Gson()
         val cocktailList = gson.fromJson(jsonString, Cocktails::class.java)
-        cocktailList.drinks.forEach { it.isAlcoholic = isAlcoholic }
-        db.cocktailDao().insertAll(*cocktailList.drinks.toTypedArray())
+        cocktailList.drinks.forEach {
+            it.isAlcoholic = isAlcoholic
+            saveCocktail(it)
+        }
+    }
+
+    private fun saveCocktail(cocktail: Cocktail) {
+        val id = db.cocktailDao().insertCocktail(cocktail)
+        if (id == -1L) {
+            mergeAndUpdateCocktail(cocktail)
+        }
+    }
+
+    private fun mergeAndUpdateCocktail(newCocktail: Cocktail) {
+        val existingCocktail = db.cocktailDao().getById(newCocktail.idDrink.toString())
+        existingCocktail.strDrink = newCocktail.strDrink
+        existingCocktail.strDrinkThumb = newCocktail.strDrinkThumb
+        existingCocktail.isAlcoholic = newCocktail.isAlcoholic
+        db.cocktailDao().updateCocktail(existingCocktail)
     }
 }
