@@ -1,7 +1,6 @@
 package fr.nextu.madoulaud_capucine
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -9,12 +8,21 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import com.google.gson.Gson
 import fr.nextu.madoulaud_capucine.databinding.ActivityMainBinding
+import fr.nextu.madoulaud_capucine.entity.Cocktails
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 class ListActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    lateinit var db: AppDatabase
+    var listType: String = "Complete"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,18 +36,9 @@ class ListActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        val listType = intent.getStringExtra("listType")
-        when(listType) {
-            "complete" -> {
-                Log.d("ListActivity", "Charger la liste complète")
-            }
-            "alcoholic" -> {
-                Log.d("ListActivity", "Charger uniquement les boissons alcoolisées")
-            }
-            "nonAlcoholic" -> {
-                Log.d("ListActivity", "Charger uniquement les boissons non alcoolisées")
-            }
-        }
+        db = AppDatabase.getInstance(applicationContext)
+
+        listType = intent.getStringExtra("listType") ?: "Complete"
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -62,5 +61,42 @@ class ListActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    override fun onStart(){
+        super.onStart()
+        getCocktailList()
+    }
+
+    fun getCocktailList() {
+        getSpecificCocktailList("Non_Alcoholic", false)
+        getSpecificCocktailList("Alcoholic", true)
+    }
+
+    private fun getSpecificCocktailList(type: String, isAlcoholic: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            requestCocktailList(type) { jsonResponse ->
+                cocktailsFromJson(jsonResponse, isAlcoholic)
+            }
+        }
+    }
+
+    private fun requestCocktailList(type: String, callback: (String) -> Unit) {
+        val client = OkHttpClient()
+        val request: Request = Request.Builder()
+            .url("https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=$type")
+            .get()
+            .build()
+
+        client.newCall(request).execute().use { response ->
+            callback(response.body?.string() ?: "")
+        }
+    }
+
+    private fun cocktailsFromJson(jsonString: String, isAlcoholic: Boolean) {
+        val gson = Gson()
+        val cocktailList = gson.fromJson(jsonString, Cocktails::class.java)
+        cocktailList.drinks.forEach { it.isAlcoholic = isAlcoholic }
+        db.cocktailDao().insertAll(*cocktailList.drinks.toTypedArray())
     }
 }

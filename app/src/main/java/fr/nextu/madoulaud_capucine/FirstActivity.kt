@@ -25,19 +25,19 @@ class FirstActivity : AppCompatActivity() {
 
         binding.buttonViewCompleteList.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
-            intent.putExtra("listType", "complete")
+            intent.putExtra("listType", "Complete")
             startActivity(intent)
         }
 
         binding.buttonViewAlcoholicList.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
-            intent.putExtra("listType", "alcoholic")
+            intent.putExtra("listType", "Alcoholic")
             startActivity(intent)
         }
 
         binding.buttonViewNonAlcoholicList.setOnClickListener {
             val intent = Intent(this, ListActivity::class.java)
-            intent.putExtra("listType", "nonAlcoholic")
+            intent.putExtra("listType", "Non_Alcoholic")
             startActivity(intent)
         }
     }

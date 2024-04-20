@@ -2,8 +2,8 @@
     <string name="app_name">App android kotlin</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="first_fragment_label">Cocktail list</string>
+    <string name="second_fragment_label">Your cocktail</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
@@ -48,4 +48,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="cocktail_image">cocktail image</string>
+    <string name="contain_alcohol">contain alcohol</string>
 </resources>
