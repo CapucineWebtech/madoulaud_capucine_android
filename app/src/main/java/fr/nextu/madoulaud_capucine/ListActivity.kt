@@ -1,6 +1,13 @@
 package fr.nextu.madoulaud_capucine
 
+import android.Manifest
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,6 +16,9 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.google.gson.Gson
 import fr.nextu.madoulaud_capucine.databinding.ActivityMainBinding
 import fr.nextu.madoulaud_capucine.db.AppDatabase
@@ -42,6 +52,8 @@ class ListActivity : AppCompatActivity() {
         db = AppDatabase.getInstance(applicationContext)
 
         listType = intent.getStringExtra("listType") ?: "Complete"
+
+        createNotificationChannel()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -94,6 +106,9 @@ class ListActivity : AppCompatActivity() {
     override fun onStart(){
         super.onStart()
         getCocktailList()
+        if(listType == "Alcoholic" || listType == "Complete"){
+            createAlcoholWarningNotification()
+        }
     }
 
     fun getCocktailList() {
@@ -143,5 +158,46 @@ class ListActivity : AppCompatActivity() {
         existingCocktail.strDrinkThumb = newCocktail.strDrinkThumb
         existingCocktail.isAlcoholic = newCocktail.isAlcoholic
         db.cocktailDao().updateCocktail(existingCocktail)
+    }
+
+    private fun createNotificationChannel(){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            val name = "Attention to alcohol"
+            val descriptionText = "When the user clicks to view alcoholic cocktails."
+            val importance = NotificationManager.IMPORTANCE_HIGH
+            val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
+                description = descriptionText
+            }
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    companion object{
+        const val CHANNEL_ID = "app_fr_nextu_madoulaud_capucine"
+    }
+
+    private fun createAlcoholWarningNotification() {
+        val intent = Intent(this, ListActivity::class.java).apply {
+            putExtra("listType", "Non_Alcoholic")
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+
+        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle("Caution with alcohol")
+            .setContentText("Excessive alcohol consumption is harmful to health.")
+            .setStyle(NotificationCompat.BigTextStyle().bigText("Excessive alcohol consumption can cause serious health problems and dependencies. Consider consuming in moderation or opt for non-alcoholic alternatives."))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .addAction(R.drawable.alcohol, "View non-alcoholic cocktails", pendingIntent)
+
+        with(NotificationManagerCompat.from(this)) {
+            if (ActivityCompat.checkSelfPermission(this@ListActivity, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(Manifest.permission.POST_NOTIFICATIONS), 1)
+                return@with
+            }
+            notify(1, builder.build())
+        }
     }
 }
