@@ -1,53 +1,12 @@
 <resources>
     <string name="app_name">App android kotlin</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Cocktail list</string>
     <string name="second_fragment_label">Your cocktail</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
     <string name="presentation_of_the_app">Welcome to our personalized cocktail app!\n\nHere, we celebrate the art of mixology with a unique twist. Whether you\'re a fan of classic cocktails, a lover of alcohol-free drinks, or simply undecided, we\'ve got you covered.\n\nExplore our selection of cocktails with just one click. Choose from creations with alcohol, without alcohol, or let yourself be surprised by our indifferent selection.\n\nDiscover each cocktail with a tempting photo, its name, and of course, the answer to the crucial question: does it contain alcohol? When you find the one that catches your eye, a simple click will reveal all its secrets.\n\nGet the detailed recipe, appetizing photo, necessary ingredients, the glass to use, precise measurements, and much more. Get ready to become the ultimate mixologist, whether you\'re at home or out for the night.\n\nDive into a world of flavors, creativity, and elegance. Welcome to the custom cocktail experience.</string>
     <string name="view_all_cocktails">View all cocktails</string>
     <string name="view_alcoholic_cocktails">View alcoholic cocktails</string>
     <string name="view_non_alcoholic_cocktails">View non alcoholic cocktails</string>
-
-    <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
-        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
-        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
-        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
-        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
-        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
-        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
-        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
-        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
-        bibendum, vel congue leo egestas.\n\n
-        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
-        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
-        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
-        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
-        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
-        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
-        est.\n\n
-        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
-        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
-        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
-        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
-        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
-        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
-        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
-        convallis.\n\n
-        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
-        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
-        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
-        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
-        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
-        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
-    </string>
     <string name="cocktail_image">cocktail image</string>
     <string name="contain_alcohol">contain alcohol</string>
     <string name="glass_label">Glass:</string>
@@ -55,4 +14,8 @@
     <string name="with_alcohol_label">With alcohol:</string>
     <string name="last_modification_label">Last modification:</string>
     <string name="instructions_label">Instructions:</string>
+    <string name="home">Home</string>
+    <string name="alcoholic_cocktails">Alcoholic cocktails</string>
+    <string name="non_alcoholic_cocktails">Non alcoholic cocktails</string>
+    <string name="all_cocktails">All cocktails</string>
 </resources>

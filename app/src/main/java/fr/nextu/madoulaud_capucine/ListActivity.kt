@@ -1,5 +1,6 @@
 package fr.nextu.madoulaud_capucine
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -50,13 +51,38 @@ class ListActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.action_home -> {
+                val intent = Intent(this, FirstActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            R.id.alcoholic_cocktails -> {
+                updateListTypeAndRefresh("Alcoholic")
+                true
+            }
+            R.id.non_alcoholic_cocktails -> {
+                updateListTypeAndRefresh("Non_Alcoholic")
+                true
+            }
+            R.id.all_cocktails -> {
+                updateListTypeAndRefresh("Complete")
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun updateListTypeAndRefresh(newListType: String) {
+        if (listType != newListType) {
+            listType = newListType
+            refreshFragment()
+        }
+    }
+
+    private fun refreshFragment() {
+        val navController = findNavController(R.id.nav_host_fragment_content_main)
+        navController.navigate(R.id.FirstFragment)
     }
 
     override fun onSupportNavigateUp(): Boolean {
